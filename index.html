@@ -1,28 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Brewed Labs</title>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.5; max-width: 900px; margin: 24px auto; padding: 0 16px; }
-    .card { border: 1px solid #e6e6e6; border-radius: 16px; padding: 16px; margin: 16px 0; }
-    a { text-decoration: none; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deutsch Cards</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Deutsch Cards, the earlier German vocabulary app from BrewedLabs. Its successor is Wortfreund.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: same header/footer as the landing page; one readable column; online services as label/value rows. */
+:root{
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#14162B; --muted:#5D6178; --line:#E2E4EE;
+  --primary:#3346C8; --primary-tint:#E8EBFB;
+  --der:#2347C8; --die:#A3164F; --das:#1D6B30; --das-bg:#E2F1E5;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D; --das-bg:#18301F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D; --das-bg:#18301F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:var(--primary)}
+a:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:6px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.dots{display:flex;gap:4px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--der)}.dots i:nth-child(2){background:var(--die)}.dots i:nth-child(3){background:var(--das)}
+nav a.back{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
+nav a.back:hover{color:var(--ink)}
+article{max-width:720px;margin:0 auto;padding-block:24px 64px}
+h1{font-size:clamp(34px,5vw,48px);line-height:1.08;letter-spacing:-.025em;font-weight:800;margin:0 0 8px;text-wrap:balance}
+.date{color:var(--muted);font-size:15px;margin:0 0 28px}
+.summary{background:var(--das-bg);border-radius:18px;padding:20px 22px;margin:0 0 40px;font-weight:600}
+.summary p{margin:0}
+h2{font-size:22px;letter-spacing:-.01em;font-weight:800;margin:44px 0 10px;text-wrap:balance}
+p{margin:0 0 14px}
+ul{margin:0 0 14px;padding-left:20px}
+li{margin-bottom:6px}
+.muted{color:var(--muted)}
+.services{display:grid;gap:12px;margin:16px 0 8px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.svc h3{margin:0 0 6px;font-size:16.5px;font-weight:800}
+.svc dl{display:grid;grid-template-columns:110px 1fr;gap:4px 14px;margin:0;font-size:15px}
+.svc dt{color:var(--muted);font-weight:600}
+.svc dd{margin:0;min-width:0}
+.off{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--primary);background:var(--primary-tint);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+.mail{user-select:all;font-weight:600}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+@media (max-width:520px){.svc dl{grid-template-columns:1fr}.svc dt{margin-top:6px}}
+.newapp{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;justify-content:space-between;background:var(--primary-tint);border-radius:18px;padding:18px 20px;margin:0 0 36px}
+.newapp p{margin:0;font-weight:600}
+.newapp a{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:12px;background:var(--primary);color:var(--surface);font-weight:700;text-decoration:none}
+.lead{font-size:19px;color:var(--muted);margin:0 0 24px}
+.cardsicon{width:60px;height:60px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--primary);margin-bottom:18px}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
 
-<h1>Brewed Labs</h1>
-<p>We build simple, high-quality mobile apps.</p>
+<div class="wrap">
+  <nav aria-label="Main">
+    <span class="mark">Deutsch Cards</span>
+    <a class="back" href="https://wortfreund.brewedlabs.app/">Wortfreund →</a>
+  </nav>
 
-<div class="card">
-  <h2>Deutsch Cards - Learn German</h2>
-  <p>Learn German vocabulary visually with collections and review mode. Offline-first with optional Google Drive backup.</p>
-  <p>
-    <a href="privacy.html">Privacy Policy</a></br>
-    <a href="terms.html">Terms of Service</a></br>
-    <a href="mailto:ma7amedmhm.dev@gmail.com">Support</a>
-  </p>
+  <article>
+    <div class="newapp"><p>Deutsch Cards has a successor: <b>Wortfreund</b>, with pictures, sound, articles in color and smart daily reviews.</p><a href="https://wortfreund.brewedlabs.app/">Meet Wortfreund</a></div>
+    <div class="cardsicon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="7" y="3" width="13" height="15" rx="2.5"/><path d="M4 7v11a3 3 0 0 0 3 3h9"/></svg></div>
+    <h1>Deutsch Cards</h1>
+    <p class="lead">Learn German vocabulary visually, with picture cards, your own collections and a simple review mode.</p>
+
+    <div class="services">
+      <section class="svc"><h3>Picture cards</h3><p style="margin:0">Every word on a card with a picture, so it's easier to remember.</p></section>
+      <section class="svc"><h3>Collections</h3><p style="margin:0">Group words the way you study them, by topic or by lesson.</p></section>
+      <section class="svc"><h3>Review mode</h3><p style="margin:0">Go through your cards again to keep the words fresh.</p></section>
+      <section class="svc"><h3>Offline first</h3><p style="margin:0">Everything works without internet. Back up to your own Google Drive if you like.</p></section>
+    </div>
+
+    <h2>Support</h2>
+    <p>Questions or a problem? Write to <span class="mail">labsbrewed@gmail.com</span>.</p>
+  </article>
+
+  <footer>
+    <div style="display:flex;gap:22px;flex-wrap:wrap"><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of service</a></div>
+    <span>© 2026 BrewedLabs</span>
+  </footer>
 </div>
 
 </body>
